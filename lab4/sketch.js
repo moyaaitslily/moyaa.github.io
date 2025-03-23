@@ -12,13 +12,16 @@ function setup() {
     c.position(10,60);
 
     vid = createVideo('IMG_2403.mp4', ()=>{
-        vid.volume(0);  
-        vid.loop();     
-        vid.play();       
-      });
-      vid.size(320, 500);
-      vid.position(60,60);
-      vid.hide(); 
+        vid.volume(1);
+        vid.elt.muted = false;
+        vid.hide(); 
+    }); 
+        vid.size(320, 500);
+        vid.position(60, 60);
+
+    playButton = createButton('▶️');
+    playButton.position(180, 600);
+    playButton.mousePressed(toggleVideo);
 
     imgElement = createImg('IMG_2776.JPG');
     imgElement.size(350, 200); 
@@ -30,6 +33,15 @@ function setup() {
             image(canvasImg,0,0,width,height);
         }
         if (vid){
-            image(vid, 60, 80, 250, 350);
+            image(vid, 20, 20, 360, 480);
+        }
+    }
+function toggleVideo() {
+        if (vid.elt.paused) {
+            vid.play();
+            playButton.html('⏯️');
+        } else {
+            vid.pause();
+            playButton.html('▶');
         }
     }
